@@ -4,8 +4,8 @@ import { JwtModule } from '@nestjs/jwt';
 @Module({
   imports: [
     JwtModule.register({
-      secret: 'your_jwt_secret', // !!!Секрет для подписи токенов
-      signOptions: { expiresIn: '1h' }, // !!! Время жизни токена
+      secret: process.env.JWT_SECRET, 
+      signOptions: { expiresIn: '60s' }, 
     }),
   ],
   providers: [],
