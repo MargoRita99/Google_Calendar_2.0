@@ -5,7 +5,7 @@ import { CurrentUser } from 'src/authentification/user.decorator';
 import { User } from 'src/user/user.entity';
 
 @Controller('google_log')
-@UseGuards(AuthGuard)
+@UseGuards(AuthGuard)  // Это будет применяться ко всем маршрутам контроллера
 export class GoogleLogController {
   constructor(private readonly googleLogService: GoogleLogService) {}
 
