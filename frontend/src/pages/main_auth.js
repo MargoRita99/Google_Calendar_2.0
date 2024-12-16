@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import GoogleLogin from 'react-google-login'; // Для Google регистрации
+import GoogleLogin from '@react-oauth/google'; // Для Google регистрации
 import axios from 'axios';
 
 const AuthPage = () => {
