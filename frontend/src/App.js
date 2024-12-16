@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AuthPage from 'src/pages/main_auth'; // Компонент для регистрации и входа
+import AuthPage from './pages/main_auth'; // Компонент для регистрации и входа
 
 const App = () => {
   return (
