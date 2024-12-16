@@ -12,9 +12,16 @@ export class UserService {
   ) {}
 
   // Регистрация пользователя
-  async createUser(email: string, password: string): Promise<User> {
-    const hashedPassword = await bcrypt.hash(password, 10); // Хэшируем пароль
-    const user = this.userRepository.create({ email, password: hashedPassword });
+  async createUser(email: string, password?: string, name?: string): Promise<User> {
+    // Если пароль передан, хэшируем его
+    const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
+    
+    const user = this.userRepository.create({
+      email,
+      password: hashedPassword,
+      name, // Имя пользователя для Google
+    });
+
     return this.userRepository.save(user);
   }
 

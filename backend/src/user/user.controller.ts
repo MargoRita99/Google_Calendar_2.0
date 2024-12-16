@@ -2,17 +2,17 @@ import { Controller, Post, Body, Get, Param, Patch, Delete } from '@nestjs/commo
 import { UserService } from './user.service';
 import { User } from './user.entity';
 
-@Controller('users')
+@Controller('api')
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
-  // Регистрация пользователя
   @Post('register')
   async register(
     @Body('email') email: string,
     @Body('password') password: string,
-  ): Promise<User> {
-    return this.usersService.createUser(email, password);
+  ) {
+    const user = await this.usersService.createUser(email, password);
+    return { message: 'Регистрация успешна', userId: user.id };
   }
 
   // Получение пользователя по email
