@@ -2,12 +2,12 @@ import { IsString, IsOptional } from 'class-validator';
 
 export class CreateCalendarDto {
   @IsString()
-  name: string; // Название календаря
+  name: string; 
 
   @IsOptional()
   @IsString()
-  description?: string; // Описание календаря
+  description?: string; 
 
   @IsOptional()
-  googleCalendarId?: string; // ID календаря в Google
+  googleCalendarId?: string;
 }

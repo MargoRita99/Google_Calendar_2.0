@@ -13,17 +13,15 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly userService: UserService,
   ) {
-    this.googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID); // Инициализация клиента Google OAuth
+    this.googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
   }
 
-  // Генерация JWT токена
   async generateToken(user: User): Promise<{ accessToken: string }> {
     const payload = { sub: user.id, email: user.email };
-    const accessToken = this.jwtService.sign(payload); // Подпись токена
+    const accessToken = this.jwtService.sign(payload);
     return { accessToken };
   }
 
-  // Проверка данных при авторизации
   async validateUser(email: string, password: string): Promise<User> {
     const user = await this.userService.findUserByEmail(email);
     if (!user) {
@@ -36,7 +34,6 @@ export class AuthService {
     return user;
   }
 
-  // Валидация токена
   async validateToken(token: string): Promise<User> {
     try {
       const decoded = this.jwtService.verify(token);
@@ -52,7 +49,6 @@ export class AuthService {
 
   async handleGoogleLogin(tokenId: string): Promise<string> {
     try {
-      // Проверка токена через Google API
       const ticket = await this.googleClient.verifyIdToken({
         idToken: tokenId,
         audience: process.env.GOOGLE_CLIENT_ID,
@@ -65,15 +61,12 @@ export class AuthService {
   
       const { email, name } = payload;
   
-      // Проверка, есть ли пользователь с таким email
       let user = await this.userService.findUserByEmail(email);
   
       if (!user) {
-        // Если пользователя нет, создаем его (пароль не нужен для Google)
         user = await this.userService.createUser(email, null, name);
       }
   
-      // Генерация JWT токена для пользователя
       return this.jwtService.sign({ sub: user.id, email: user.email });
     } catch (error) {
       throw new UnauthorizedException('Failed to authenticate with Google');

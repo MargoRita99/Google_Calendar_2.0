@@ -7,13 +7,13 @@ export class Notification {
   id: number;
 
   @ManyToOne(() => Event, (event) => event.notifications, { onDelete: 'CASCADE' })
-  event: Event; // Связь с событием
+  event: Event; 
 
   @Column()
-  notifyAt: Date; // Время, когда нужно отправить уведомление
+  notifyAt: Date; 
 
   @Column({ default: false })
-  isSent: boolean; // Отправлено ли уведомление
+  isSent: boolean; 
 
   @CreateDateColumn()
   createdAt: Date;

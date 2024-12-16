@@ -18,19 +18,19 @@ export class User {
   name: string;
 
   @Column({ nullable: true })
-  googleCalendarId: string; // ID основного календаря в Google
+  googleCalendarId: string; 
 
   @Column('json', { nullable: true })
   tokens: { accessToken: string; refreshToken: string; expiryDate: Date };
 
   @OneToMany(() => Event, (event) => event.user, { cascade: true })
-  events: Event[]; // Массив событий, связанных с пользователем
+  events: Event[]; 
 
   @OneToMany(() => Calendar, (calendar) => calendar.user, { cascade: true })
-  calendars: Calendar[]; // Массив календарей, связанных с пользователем
+  calendars: Calendar[]; 
 
   @OneToMany(() => GoogleLog, (googleLog) => googleLog.user, { cascade: true })
-  syncLogs: GoogleLog[]; // Логи синхронизации Google Calendar для пользователя
+  syncLogs: GoogleLog[]; 
   
   @CreateDateColumn()
   createdAt: Date;

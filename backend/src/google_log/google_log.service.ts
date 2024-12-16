@@ -11,7 +11,6 @@ export class GoogleLogService {
     private readonly googleLogRepository: Repository<GoogleLog>,
   ) {}
 
-  // Создать лог синхронизации
   async createLog(user: User, action: string, details?: any): Promise<GoogleLog> {
     const log = this.googleLogRepository.create({
       user,
@@ -21,7 +20,6 @@ export class GoogleLogService {
     return await this.googleLogRepository.save(log);
   }
 
-  // Получить все логи для пользователя
   async getLogsForUser(userId: number): Promise<GoogleLog[]> {
     return await this.googleLogRepository.find({
       where: { user: { id: userId } },
@@ -29,7 +27,6 @@ export class GoogleLogService {
     });
   }
 
-  // Получить лог по ID
   async getLogById(logId: number): Promise<GoogleLog> {
     return await this.googleLogRepository.findOneOrFail({
       where: { id: logId },

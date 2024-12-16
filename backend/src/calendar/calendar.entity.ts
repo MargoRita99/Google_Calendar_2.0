@@ -8,19 +8,19 @@ export class Calendar {
   id: number;
 
   @Column()
-  name: string; // Название календаря
+  name: string; 
 
   @Column({ nullable: true })
-  description: string; // Описание календаря
+  description: string; 
 
   @ManyToOne(() => User, (user) => user.calendars, { onDelete: 'CASCADE' })
-  user: User; // Связь с пользователем
+  user: User; 
 
   @Column({ nullable: true })
-  googleCalendarId: string; // ID календаря в Google
+  googleCalendarId: string; 
 
   @OneToMany(() => Event, (event) => event.calendar, { cascade: true })
-  events: Event[]; // Связь с событиями в этом календаре
+  events: Event[]; 
 
   @CreateDateColumn()
   createdAt: Date;

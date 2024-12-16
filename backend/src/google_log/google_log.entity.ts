@@ -7,14 +7,14 @@ export class GoogleLog {
   id: number;
 
   @ManyToOne(() => User, (user) => user.syncLogs, { onDelete: 'CASCADE' })
-  user: User; // Пользователь, для которого происходила синхронизация
+  user: User; 
 
   @Column()
-  action: string; // Тип действия (например, "fetch", "update", "delete")
+  action: string; 
 
   @Column('json', { nullable: true })
-  details: any; // Детали синхронизации (например, ID событий)
+  details: any; 
 
   @CreateDateColumn()
-  createdAt: Date; // Время выполнения синхронизации
+  createdAt: Date; 
 }

@@ -15,19 +15,19 @@ export class UserController {
     return { message: 'Регистрация успешна', userId: user.id };
   }
 
-  // Получение пользователя по email
+
   @Get('email/:email')
   async getUserByEmail(@Param('email') email: string): Promise<User> {
     return this.usersService.findUserByEmail(email);
   }
 
-  // Получение пользователя по ID
+
   @Get(':id')
   async getUserById(@Param('id') id: number): Promise<User> {
     return this.usersService.findUserById(id);
   }
 
-  // Обновление данных пользователя
+
   @Patch(':id')
   async updateUser(
     @Param('id') id: number,
@@ -36,7 +36,7 @@ export class UserController {
     return this.usersService.updateUser(id, updateData);
   }
 
-  // Удаление пользователя
+
   @Delete(':id')
   async deleteUser(@Param('id') id: number): Promise<void> {
     return this.usersService.deleteUser(id);

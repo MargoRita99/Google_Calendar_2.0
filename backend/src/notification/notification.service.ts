@@ -11,7 +11,6 @@ export class NotificationService {
     private readonly notificationRepository: Repository<Notification>,
   ) {}
 
-  // Создать уведомление
   async createNotification(event: Event, notifyAt: Date): Promise<Notification> {
     const notification = this.notificationRepository.create({
       event,
@@ -20,7 +19,6 @@ export class NotificationService {
     return await this.notificationRepository.save(notification);
   }
 
-  // Получить все уведомления для конкретного события
   async findByEvent(eventId: number): Promise<Notification[]> {
     return await this.notificationRepository.find({
       where: { event: { id: eventId } },
@@ -28,7 +26,6 @@ export class NotificationService {
     });
   }
 
-  // Получить уведомления, которые нужно отправить
   async findPendingNotifications(currentDate: Date): Promise<Notification[]> {
     return await this.notificationRepository.find({
       where: { notifyAt: currentDate, isSent: false },
@@ -36,7 +33,7 @@ export class NotificationService {
     });
   }
 
-  // Обновление статуса отправки
+
   async markAsSent(notificationId: number): Promise<Notification> {
     const notification = await this.notificationRepository.findOneOrFail({
       where: { id: notificationId },
@@ -45,7 +42,7 @@ export class NotificationService {
     return await this.notificationRepository.save(notification);
   }
 
-  // Удалить уведомление
+
   async deleteNotification(notificationId: number): Promise<void> {
     await this.notificationRepository.delete(notificationId);
   }
